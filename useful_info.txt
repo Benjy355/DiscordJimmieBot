@@ -1,0 +1,8 @@
+Invite link:
+https://discordapp.com/oauth2/authorize?client_id=557988774089588747&permissions=536050770&scope=bot
+
+Permissions INT
+536050770
+
+Libraries used:
+https://github.com/Rapptz/discord.py
