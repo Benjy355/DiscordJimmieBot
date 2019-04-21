@@ -4,3 +4,4 @@ from discord_oauth import BOT_TOKEN
 
 jBot = JimmieBot()
 jBot.start()
+#Don't forget to wait here

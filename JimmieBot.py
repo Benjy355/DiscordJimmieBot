@@ -1,4 +1,3 @@
-import JimMod
 import importlib
 from Common import *
 import os
@@ -84,6 +83,3 @@ class JimmieBot(discord.Client):
         cleaned_str = message.content.split(" ", 1)
         #[n:] removes the prefix
         cleaned_str = cleaned_str[0][len(self.COMMAND_PREFIX):].lower()
-
-if (__name__ == "__main__"):
-    test = JimmieBot()
