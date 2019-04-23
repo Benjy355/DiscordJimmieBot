@@ -41,30 +41,31 @@ class JimmieBot(discord.Client):
             #NOTE: os.path.isfile returns true on literally nothing? What the fuck, python
             if (os.path.isdir(full_module)):
                 print("Ignoring %s" % full_module)
-                break
+                continue
 
             module = os.path.splitext(full_module)[0]
             full_package = "%s.%s" % (folder.replace(os.path.sep, "."), module)
             #Import the module
             try:
                 newest_module = importlib.import_module(full_package)
-            except ImportError as err:
+            except Exception as err:
                 print("Failed to load %s: %s" % (full_package, err))
-                break
+                continue
             #Catch to see if we are importing a compatible module (Check for our usual values)
-            #TODO: Check for the actual call function as well, instead of using a try/catch
-            try:
-                print("Loaded [%s]%s" % (float(newest_module.__version__), newest_module.__name__))
-            except AttributeError as err:
-                print("Failed to load %s: Invalid Module" % full_package)
-                break
+            #We can't unload modules once we import them... So, we just never ever add it to the Commands/Regex things... ever.
             self._MODULES.append(newest_module)
-            newest_module.bot_client = self
-            #Add our new module to it's type list
-            if (newest_module.__type__ == ModuleType.COMMAND):
-                self._COMMANDS[newest_module.__trigger__] = newest_module
-            elif (newest_module.__type__ == ModuleType.REGEX):
-                self._PATTERNS.append(newest_module)
+            try:
+                newest_module.bot_client = self
+                #Add our new module to it's type list
+                if (newest_module.__type__ == ModuleType.COMMAND):
+                    self._COMMANDS[newest_module.__trigger__] = newest_module
+                elif (newest_module.__type__ == ModuleType.REGEX):
+                    self._PATTERNS.append(newest_module)
+                print("Loaded [%s]%s" % (newest_module.__version__, newest_module.__name__))
+            except AttributeError as err:
+                print("Failed to load %s: Invalid Module!" % full_package)
+                continue
+            
         print("--Done!--\n")
             
     async def on_ready(self):

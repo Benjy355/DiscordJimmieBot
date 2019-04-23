@@ -3,7 +3,7 @@ import JimmieBot
 import discord
 
 __name__ = "Test module 2"
-__version__ = 0.0
+__version__ = "0.0"
 #Either the command called, or the RegEx pattern used
 __trigger__ = "fuckoff"
 #Command or Regex Pattern
