@@ -14,7 +14,7 @@ _config = {}
 _json_directory = os.getenv('APPDATA') + "\\jimmiebot"
 _json_file = _json_directory + "\\c%s.json"
 
-def _load(server: discord.Server):
+def _load(server: discord.Guild):
     #Attempt to load a server's json file, if no file exists, generate empty dict in place
     global _config
     json_file = _json_file % server.id
@@ -31,7 +31,7 @@ def _load(server: discord.Server):
         print("No json file found for server %s" % str(server.id))
         _config[server] = {}
 
-def get(setting, server: discord.Server, default=None):
+def get(setting, server: discord.Guild, default=None):
     #returns the reference to a setting, or a reference to a new one
     global _config
     if (not server): #Generally happens when people private message the bot
@@ -43,7 +43,7 @@ def get(setting, server: discord.Server, default=None):
     
     return _config[server][setting]
 
-def forget(setting, server: discord.Server):
+def forget(setting, server: discord.Guild):
     #removes a setting from _config[server]
     global _config
     if (setting in _config[server]):

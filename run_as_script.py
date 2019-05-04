@@ -3,5 +3,5 @@ from JimmieBot import JimmieBot
 from discord_oauth import BOT_TOKEN
 
 jBot = JimmieBot()
-jBot.start()
-#Don't forget to wait here
+jBot.run(BOT_TOKEN)
+#Should we try to catch it when it crashes? (As it always does)

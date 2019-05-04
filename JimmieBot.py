@@ -1,6 +1,11 @@
 import importlib
-from Common import *
+import EmojiEnum
 import os
+import Config
+
+from Common import *
+
+
 
 #VERSION 2, BABE
 
@@ -53,7 +58,6 @@ class JimmieBot(discord.Client):
                 continue
             #Catch to see if we are importing a compatible module (Check for our usual values)
             #We can't unload modules once we import them... So, we just never ever add it to the Commands/Regex things... ever.
-            self._MODULES.append(newest_module)
             try:
                 newest_module.bot_client = self
                 #Add our new module to it's type list
@@ -61,6 +65,7 @@ class JimmieBot(discord.Client):
                     self._COMMANDS[newest_module.__trigger__] = newest_module
                 elif (newest_module.__type__ == ModuleType.REGEX):
                     self._PATTERNS.append(newest_module)
+                self._MODULES.append(newest_module)
                 print("Loaded [%s]%s" % (newest_module.__version__, newest_module.__name__))
             except AttributeError as err:
                 print("Failed to load %s: Invalid Module!" % full_package)
@@ -76,11 +81,21 @@ class JimmieBot(discord.Client):
         if (message.author == self.user):
             return
 
-        
+        #REGEX Detection
         
         if (not message.content.startswith(self.COMMAND_PREFIX)):
             return
-            
         cleaned_str = message.content.split(" ", 1)
         #[n:] removes the prefix
         cleaned_str = cleaned_str[0][len(self.COMMAND_PREFIX):].lower()
+        
+        #Command detection
+        if (not (cleaned_str in self._COMMANDS)):
+            return
+        command = self._COMMANDS[cleaned_str]
+        if (command.__admin__ and message.author.permissions_in(message.channel)):
+            print("%s tried to call admin function %s without permissions" % (message.author.display_name, cleaned_str))
+            return
+        
+        await message.add_reaction(EmojiEnum.thumbs_up)
+        await command.on_activate(message)

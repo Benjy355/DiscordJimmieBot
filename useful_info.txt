@@ -1,3 +1,5 @@
+As of this code being made Discord.py does not support python version 3.7+
+
 Invite link:
 https://discordapp.com/oauth2/authorize?client_id=557988774089588747&permissions=536050770&scope=bot
 
