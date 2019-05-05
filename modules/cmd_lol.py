@@ -11,19 +11,12 @@ import asyncio
 __name__ = "Bad Joke Module"
 __description__ = "Rips a garbage joke from goodbadjobes.com"
 __version__ = "1.0"
-#Either the command called, or the RegEx pattern used
 __trigger__ = "lol"
-#Command or Regex Pattern
-#TODO: Add more types (Scheduled?)
 __type__ = ModuleType.COMMAND
 __admin__ = False
 
-#Set by import function of JimmieBot (hopefully)
 bot_client = None
 
-#discord.channel.TextChannel.send()
-
-#Called when the trigger phrase/condition is found
 async def on_activate(message: discord.message.Message):
     await message.channel.trigger_typing()
     try:
