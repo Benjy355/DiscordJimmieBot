@@ -2,6 +2,7 @@ import importlib
 import EmojiEnum
 import os
 import Config
+import re
 
 from Common import *
 
@@ -82,6 +83,10 @@ class JimmieBot(discord.Client):
             return
 
         #REGEX Detection
+        for pattern in self._PATTERNS:
+            test_match = re.search(pattern.__trigger__, message.content)
+            if (test_match != None):
+                await pattern.on_activate(message, test_match)
         
         if (not message.content.startswith(self.COMMAND_PREFIX)):
             return
