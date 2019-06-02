@@ -3,10 +3,9 @@ import EmojiEnum
 import os
 import Config
 import re
+import sys
 
 from Common import *
-
-
 
 #VERSION 2, BABE
 

@@ -94,3 +94,4 @@ ENV/
 *.pyc
 .vscode/settings.json
 *.pyc
+*.pyc
