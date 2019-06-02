@@ -90,8 +90,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
-.vscode/launch.json
+.vscode/*
 *.pyc
-.vscode/settings.json
-*.pyc
-*.pyc
+*/*.pyc
