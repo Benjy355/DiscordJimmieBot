@@ -9,7 +9,7 @@ import urllib
 import asyncio
 
 __name__ = "Bad Joke Module"
-__description__ = "Rips a garbage joke from goodbadjobes.com"
+__description__ = "Rips a garbage joke from goodbadjokes.com"
 __version__ = "1.0"
 __trigger__ = "lol"
 __type__ = ModuleType.COMMAND
