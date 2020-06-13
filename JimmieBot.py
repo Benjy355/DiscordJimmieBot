@@ -69,6 +69,7 @@ class JimmieBot(discord.Client):
                 print("Loaded [%s]%s" % (newest_module.__version__, newest_module.__name__))
             except AttributeError as err:
                 print("Failed to load %s: Invalid Module!" % full_package)
+                del newest_module #DON'T KNOW IF THIS WORKS YET, TEST PLS
                 continue
             
         print("--Done!--\n")
