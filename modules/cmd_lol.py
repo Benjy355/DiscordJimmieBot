@@ -20,7 +20,7 @@ bot_client = None
 async def on_activate(message: discord.message.Message):
     await message.channel.trigger_typing()
     try:
-        joke_contents = urllib.request.urlopen("https://www.goodbadjokes.com/random").read().decode()
+        joke_contents = urllib.request.urlopen(url="https://www.goodbadjokes.com/random", timeout=3).read().decode()
     except:
         print("Failed to load joke!")
         print(sys.exc_info()[0])
@@ -37,6 +37,6 @@ async def on_activate(message: discord.message.Message):
         await punchline_message.add_reaction(emoji=EmojiEnum.laugh_cry)
     else:
         await message.channel.send(content="Sorry my funny bone isn't feeling very funny right now %s" % EmojiEnum.crying, delete_after=10.0)
-        #print("Failed to make joke, dumping contents:\n %s\n%s" % (joke_container.string, punchline_container.string))
+        print("Failed to make joke, dumping contents:\n %s\n%s" % (joke_container.string, punchline_container.string))
         await asyncio.sleep(10)
         await message.delete()
